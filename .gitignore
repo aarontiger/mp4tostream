@@ -1,0 +1,9 @@
+# Project exclude paths
+/target/
+/.idea/
+/hs_err_pid7984.log
+/hs_err_pid13692.log
+/hs_err_pid19168.log
+/hs_err_pid19828.log
+/hs_err_pid29812.log
+/hs_err_pid33444.log
