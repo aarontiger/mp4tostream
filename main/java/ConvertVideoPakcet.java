@@ -1,10 +1,12 @@
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.ffmpeg.avformat.AVFormatContext;
+import org.bytedeco.javacpp.avcodec;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 
 import java.io.IOException;
 import static org.bytedeco.ffmpeg.global.avcodec.av_free_packet;
+import static org.bytedeco.ffmpeg.global.avcodec.av_packet_unref;
 
 public class ConvertVideoPakcet {
     FFmpegFrameGrabber grabber = null;
@@ -14,6 +16,7 @@ public class ConvertVideoPakcet {
     // 视频参数
     protected int audiocodecid;
     protected int codecid;
+    protected String codecname;
     protected double framerate;// 帧率
     protected int bitrate;// 比特率
 
@@ -44,6 +47,7 @@ public class ConvertVideoPakcet {
         audiocodecid = grabber.getAudioCodec();
         System.err.println("音频编码：" + audiocodecid);
         codecid = grabber.getVideoCodec();
+        codecname = grabber.getVideoCodecName();
         framerate = grabber.getVideoFrameRate();// 帧率
         bitrate = grabber.getVideoBitrate();// 比特率
         // 音频参数
@@ -65,6 +69,7 @@ public class ConvertVideoPakcet {
     public ConvertVideoPakcet to(String out) throws IOException {
         // 录制/推流器
         record = new FFmpegFrameRecorder(out, width, height);
+        record.setInterleaved(true);
         record.setVideoOption("crf", "18");
         record.setGopSize(2);
         record.setFrameRate(framerate);
@@ -76,8 +81,9 @@ public class ConvertVideoPakcet {
         AVFormatContext fc = null;
         if (out.indexOf("rtmp") >= 0 || out.indexOf("flv") > 0) {
             // 封装格式flv
-            record.setFormat("flv");
+            record.setFormat("mpeg");
             record.setAudioCodecName("aac");
+
             record.setVideoCodec(codecid);
             fc = grabber.getFormatContext();
         }
@@ -106,12 +112,15 @@ public class ConvertVideoPakcet {
                 //不需要编码直接把音视频帧推出去
                 err_index+=(record.recordPacket(pkt)?0:1);//如果失败err_index自增1
                 System.out.println(err_index);
-                av_free_packet(pkt);
+                //av_free_packet(pkt);
+                av_packet_unref(pkt);
             }catch (IOException e) {//推流失败
                 System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+                e.printStackTrace();
                 err_index++;
             } catch (Exception e) {
                 System.out.println("-------------------------------------------");
+                e.printStackTrace();
                 err_index++;
             }
         }
@@ -122,7 +131,7 @@ public class ConvertVideoPakcet {
 
         //运行，设置视频源和推流地址
         new ConvertVideoPakcet().from("E:\\meeting.mp4")
-                .to("rtmp://127.0.0.1:1935/live/mp4test")
+                .to("rtmp://192.168.66.162:1935/live/mp4test")
                 .go();
     }
 }

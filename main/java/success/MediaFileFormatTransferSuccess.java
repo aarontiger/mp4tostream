@@ -1,3 +1,5 @@
+package success;
+
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.javacpp.avcodec;
 import org.bytedeco.javacpp.avutil;
@@ -7,7 +9,7 @@ import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameRecorder;
 
 //：)Success
-public class MediaFileFormatTransfer {
+public class MediaFileFormatTransferSuccess {
     public static void recode() throws FrameGrabber.Exception, FrameRecorder.Exception {
         String filePath = "E:\\meeting.mp4";
         String ext = filePath.substring(filePath.lastIndexOf("."));
@@ -40,7 +42,7 @@ public class MediaFileFormatTransfer {
         grabber.stop();
     }
     public static void main(String[] args) throws FrameGrabber.Exception, FrameRecorder.Exception {
-        MediaFileFormatTransfer third = new MediaFileFormatTransfer();
+        MediaFileFormatTransferSuccess third = new MediaFileFormatTransferSuccess();
         third.recode();
     }
 }
