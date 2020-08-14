@@ -17,6 +17,8 @@ import org.bytedeco.javacv.FFmpegLogCallback;
 
 public class FlvFilePushToStreamSuccess {
 
+    private String mediaFileName = "E:\\mediacovert\\meeting.flv";
+    //private String mediaFileName = "E:\\meeting.mp4";
 
     public static void main(String[] args) {
          FlvFilePushToStreamSuccess util = new FlvFilePushToStreamSuccess();
@@ -25,9 +27,9 @@ public class FlvFilePushToStreamSuccess {
         public void pushMp4ToStream(){
             int err_index = 0;///推流过程中出现错误的次数
             try {
-                InputStream in = new FileInputStream("E:\\mediacovert\\meeting.flv");
+                //InputStream in = new FileInputStream(mediaFileName);
                 //FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(in, 0);
-                FFmpegFrameGrabber grabber = new FFmpegFrameGrabber("E:\\mediacovert\\meeting.flv");
+                FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(mediaFileName);
                 //grabber.setOption("stimeout", "2000000");
                 //grabber.setVideoOption("vcodec", "copy");
                 //grabber.setFormat("mpeg");
