@@ -1,5 +1,4 @@
-
-
+package success;
 
 
 import static org.bytedeco.ffmpeg.global.avcodec.av_packet_unref;
@@ -15,22 +14,20 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.FFmpegLogCallback;
 
-import static org.bytedeco.ffmpeg.global.avcodec.av_packet_unref;
 
-
-public class Mp4FilePushToStream {
+public class FlvFilePushToStreamSuccess {
 
 
     public static void main(String[] args) {
-         Mp4FilePushToStream util = new Mp4FilePushToStream();
+         FlvFilePushToStreamSuccess util = new FlvFilePushToStreamSuccess();
          util.pushMp4ToStream();
     }
         public void pushMp4ToStream(){
             int err_index = 0;///推流过程中出现错误的次数
             try {
-                InputStream in = new FileInputStream("E:\\meeting.mp4");
+                InputStream in = new FileInputStream("E:\\mediacovert\\meeting.flv");
                 //FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(in, 0);
-                FFmpegFrameGrabber grabber = new FFmpegFrameGrabber("E:\\meeting.mp4");
+                FFmpegFrameGrabber grabber = new FFmpegFrameGrabber("E:\\mediacovert\\meeting.flv");
                 //grabber.setOption("stimeout", "2000000");
                 //grabber.setVideoOption("vcodec", "copy");
                 //grabber.setFormat("mpeg");
@@ -42,7 +39,7 @@ public class Mp4FilePushToStream {
                 //获取参数
                 grabber.start();
 
-                FFmpegFrameRecorder recorder = new FFmpegFrameRecorder("rtmp://192.168.66.162:1935/live/mp4test",
+                FFmpegFrameRecorder recorder = new FFmpegFrameRecorder("rtmp://127.0.0.1:1935/live/mp4test",
                         grabber.getImageWidth(), grabber.getImageHeight(), 0);
 
                 recorder.setInterleaved(true);
@@ -51,7 +48,7 @@ public class Mp4FilePushToStream {
                 // h264编/解码器
                 recorder.setVideoCodec(avcodec.AV_CODEC_ID_H264);
                 // 封装flv格式
-                recorder.setFormat("mpeg");
+                recorder.setFormat("flv");
                 recorder.setPixelFormat(avutil.AV_PIX_FMT_YUV420P);
                 // 视频帧率(保证视频质量的情况下最低25，低于25会出现闪屏)
                 recorder.setFrameRate(grabber.getFrameRate());
