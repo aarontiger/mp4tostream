@@ -1,4 +1,4 @@
-package success;
+package javacvtest;
 
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.javacpp.avcodec;
@@ -8,8 +8,11 @@ import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameRecorder;
 
-//：)Success
-public class MediaFileFormatTransferSuccess {
+/**
+ * Mp4文件和Flv文件格式互转
+ * 已经测试成功
+ */
+public class Mp4FileAndFlvFileTransfer {
     public static void recode() throws FrameGrabber.Exception, FrameRecorder.Exception {
         String filePath = "E:\\meeting.mp4";
         String ext = filePath.substring(filePath.lastIndexOf("."));
@@ -42,7 +45,7 @@ public class MediaFileFormatTransferSuccess {
         grabber.stop();
     }
     public static void main(String[] args) throws FrameGrabber.Exception, FrameRecorder.Exception {
-        MediaFileFormatTransferSuccess third = new MediaFileFormatTransferSuccess();
+        Mp4FileAndFlvFileTransfer third = new Mp4FileAndFlvFileTransfer();
         third.recode();
     }
 }

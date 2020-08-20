@@ -1,10 +1,7 @@
-package success;
+package javacvtest;
 
 
 import static org.bytedeco.ffmpeg.global.avcodec.av_packet_unref;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 import org.bytedeco.ffmpeg.avcodec.AVPacket;
 import org.bytedeco.ffmpeg.avformat.AVFormatContext;
@@ -14,14 +11,17 @@ import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.FFmpegLogCallback;
 
-
-public class FlvFilePushToStreamSuccess {
+/**
+ * 将Flv视频文件通过rtmp协议推流到媒体服务器
+ *  已经测试成功
+ */
+public class FlvFile2Stream {
 
     private String mediaFileName = "E:\\mediacovert\\meeting.flv";
     //private String mediaFileName = "E:\\meeting.mp4";
 
     public static void main(String[] args) {
-         FlvFilePushToStreamSuccess util = new FlvFilePushToStreamSuccess();
+         FlvFile2Stream util = new FlvFile2Stream();
          util.pushMp4ToStream();
     }
         public void pushMp4ToStream(){

@@ -1,11 +1,15 @@
-package success;
+package javacvtest;
 
 import org.bytedeco.javacpp.avcodec;
 import org.bytedeco.javacv.FFmpegFrameGrabber;
 import org.bytedeco.javacv.FFmpegFrameRecorder;
 import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-public class PushMp4FileByImageSuccess {
+
+/**
+ * 将Mp4视频文件通过rtmp协议推流到媒体服务器
+ *  已经测试成功
+ */
+public class Mp4File2StreamByImage {
     static boolean exit  = false;
     public static void main(String[] args) throws Exception {
         System.out.println("start...");
